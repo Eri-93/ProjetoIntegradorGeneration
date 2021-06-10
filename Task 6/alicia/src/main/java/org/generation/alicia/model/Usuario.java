@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -34,28 +35,24 @@ public class Usuario {
 	private Date data_nascimento;
 	
 	@NotNull
-	@UniqueElements
-	@Size(min = 5, max = 255 )
+	@Email
 	private String login;
 	
 	@NotNull
-	@Size(min=5, max = 30)
+	@Size(min=5)
 	private String senha;
 	
 	@Size(max=100)
-	private String nome_startup;
+	private String nomeStartUp;
 	
 	@Size(min= 5, max=500)
 	private String resumo;
 	
-	@Size(max=2048)
-	private String link_linkedin;
+	private String linkLinkedin;
 	
-	@Size(max=2048)
-	private String link_instagram;
+	private String linkInstagram;
 	
-	@Size(max=2048)
-	private String link_facebook;
+	private String linkFacebook;
 	
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
 	@JsonIgnoreProperties("usuario")
@@ -100,13 +97,13 @@ public class Usuario {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-
-	public String getNome_Startup() {
-		return nome_startup;
+	
+	public String getNomeStartUp() {
+		return nomeStartUp;
 	}
 
-	public void setNome_Startup(String nome_startup) {
-		this.nome_startup = nome_startup;
+	public void setNomeStartUp(String nomeStartUp) {
+		this.nomeStartUp = nomeStartUp;
 	}
 
 	public String getResumo() {
@@ -117,30 +114,30 @@ public class Usuario {
 		this.resumo = resumo;
 	}
 
-	public String getLink_linkedin() {
-		return link_linkedin;
+	public String getLinkLinkedin() {
+		return linkLinkedin;
 	}
 
-	public void setLink_linkedin(String link_linkedin) {
-		this.link_linkedin = link_linkedin;
+	public void setLinkLinkedin(String linkLinkedin) {
+		this.linkLinkedin = linkLinkedin;
 	}
 
-	public String getLink_Instagram() {
-		return link_instagram;
+	public String getLinkInstagram() {
+		return linkInstagram;
 	}
 
-	public void setLink_Instagram(String link_instagram) {
-		this.link_instagram = link_instagram;
+	public void setLinkInstagram(String linkInstagram) {
+		this.linkInstagram = linkInstagram;
 	}
 
-	public String getLink_facebook() {
-		return link_facebook;
+	public String getLinkFacebook() {
+		return linkFacebook;
 	}
 
-	public void setLink_facebook(String link_facebook) {
-		this.link_facebook = link_facebook;
+	public void setLinkFacebook(String linkFacebook) {
+		this.linkFacebook = linkFacebook;
 	}
-	
+
 	public List<Postagem> getPostagem() {
 		return postagem;
 	}
