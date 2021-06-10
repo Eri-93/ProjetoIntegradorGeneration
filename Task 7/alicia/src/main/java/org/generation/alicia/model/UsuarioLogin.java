@@ -18,7 +18,7 @@ public class UsuarioLogin {
 		this.nome = nome;
 	}
 
-	public String getUsuario() {
+	public String getLogin() {
 		return login;
 	}
 

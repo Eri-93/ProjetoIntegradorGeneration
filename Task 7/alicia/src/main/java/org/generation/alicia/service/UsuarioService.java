@@ -31,7 +31,7 @@ public class UsuarioService {
 		
 		int idade = Period.between(usuario.getDataNascimento(), LocalDate.now()).getYears();
 		
-		if(idade < 18) { // Checa se o usuário tem mais de 18 anos
+		if(idade < 16) { // Checa se o usuário tem mais de 16 anos
 			return null;
 		}
 		
@@ -45,14 +45,14 @@ public class UsuarioService {
 	public Optional<UsuarioLogin> Logar(Optional<UsuarioLogin> user){
 		
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		Optional<Usuario> usuario = repository.findByLogin(user.get().getUsuario());
+		Optional<Usuario> usuario = repository.findByLogin(user.get().getLogin());
 		
 		if(usuario.isPresent()) {
 			if(encoder.matches(user.get().getSenha(), usuario.get().getSenha())) {
 				
-				String auth = user.get().getUsuario()+":" + user.get().getSenha();
+				String auth = user.get().getLogin()+ ":" + user.get().getSenha();
 				byte[] encodeAuth = Base64.encodeBase64(auth.getBytes(Charset.forName("US-ASCII")));
-				String authHeader = "Basic "+ new String(encodeAuth);
+				String authHeader = "Basic " + new String(encodeAuth);
 				
 				user.get().setToken(authHeader);
 				user.get().setNome(usuario.get().getNome());

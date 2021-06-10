@@ -16,7 +16,7 @@ public interface PostagemRepository extends JpaRepository<Postagem, Long> {
 	
 	public List<Postagem> findAllByTema(Tema tema);
 
-	@Query(value = "select count(tema_id) from tb_postagens where tema_id = :id", nativeQuery = true)
-	public int countPosts(@Param("id") long id);
+	@Query(value = "select count(tema_id) from tb_postagem where tema_id = :id", nativeQuery = true)
+	public long countPosts(@Param("id") long id);
 	
 }
