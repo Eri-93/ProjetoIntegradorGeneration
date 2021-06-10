@@ -19,7 +19,6 @@ import org.hibernate.validator.constraints.UniqueElements;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-
 @Entity
 @Table(name = "tb_usuario")
 public class Usuario {
@@ -45,7 +44,6 @@ public class Usuario {
 	
 	@Size(max=100)
 	private String nomeStartUp;
-
 	
 	@Size(min= 5, max=500)
 	private String resumo;
@@ -99,13 +97,14 @@ public class Usuario {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-
+	
 	public String getNomeStartUp() {
 		return nomeStartUp;
 	}
 
 	public void setNomeStartUp(String nomeStartUp) {
 		this.nomeStartUp = nomeStartUp;
+	}
 
 	public String getResumo() {
 		return resumo;

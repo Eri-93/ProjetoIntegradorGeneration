@@ -1,6 +1,9 @@
 package org.generation.alicia.controller;
 
+import java.util.List;
+
 import org.generation.alicia.model.*;
+import org.generation.alicia.repository.PostagemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,7 +34,7 @@ public class PostagemController {
 	public ResponseEntity<Postagem> getById(@PathVariable long id) {
 		return repository.findById(id)
 				.map(resp -> ResponseEntity.ok(resp))
-				.orElse(ResponseEntity,notFound().build());
+				.orElse(ResponseEntity.notFound().build());
 	}
 	
 	@GetMapping("/texto/{texto}")
