@@ -35,12 +35,12 @@ public class Postagem {
 	private int compartilhamentos;
 
 	@ManyToOne
-	@JsonIgnoreProperties("Tema")
-	private Tema tema_id;
+	@JsonIgnoreProperties("postagem")
+	private Tema tema;
 
 	@ManyToOne
-	@JsonIgnoreProperties("Usuario")
-	private Usuario usuario_id;
+	@JsonIgnoreProperties("postagem")
+	private Usuario usuario;
 
 	public long getId() {
 		return id;
@@ -90,20 +90,21 @@ public class Postagem {
 		this.compartilhamentos = compartilhamentos;
 	}
 
-	public Tema getTema_id() {
-		return tema_id;
+	public Tema getTema() {
+		return tema;
 	}
 
-	public void setTema_id(Tema tema_id) {
-		this.tema_id = tema_id;
+	public void setTema(Tema tema) {
+		this.tema = tema;
 	}
 
-	public Usuario getUsuario_id() {
-		return usuario_id;
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
-	public void setUsuario_id(Usuario usuario_id) {
-		this.usuario_id = usuario_id;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+
 	}
 
 }
