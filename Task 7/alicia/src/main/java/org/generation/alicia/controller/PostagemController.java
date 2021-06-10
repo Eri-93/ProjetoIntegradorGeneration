@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.generation.alicia.model.*;
 import org.generation.alicia.repository.PostagemRepository;
+import org.generation.alicia.service.PostagemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,9 +22,16 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/postagens")
 public class PostagemController {
-
+ 
+	// Injeção de dependências
+	
+	@Autowired
+	private PostagemService postagemService;
+	
 	@Autowired
 	private PostagemRepository repository;
+	
+	// Métodos Get
 	
 	@GetMapping
 	public ResponseEntity<List<Postagem>> getAll() {
@@ -52,15 +60,31 @@ public class PostagemController {
 		return ResponseEntity.ok(repository.findAllByTema(tema));
 	}
 	
-	@PostMapping
+	// Métodos Post
+	
+	@PostMapping("/postar")
 	public ResponseEntity<Postagem> post(@RequestBody Postagem postagem) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(postagem));
 	}
 	
-	@PutMapping
+	// Métodos Put
+	
+	@PutMapping("/alterar")
 	public ResponseEntity<Postagem> put(@RequestBody Postagem postagem) {
 		return ResponseEntity.status(HttpStatus.OK).body(repository.save(postagem));
 	}
+	
+	@PutMapping("/curtir/{id}")
+	public ResponseEntity<Postagem> putCurtirPostagemId(@PathVariable Long id) {
+		return ResponseEntity.status(HttpStatus.OK).body(postagemService.curtir(id));
+	}
+	
+	@PutMapping("/descurtir/{id}")
+	public ResponseEntity<Postagem> putDescurtirPostagemId(@PathVariable Long id) {
+		return ResponseEntity.status(HttpStatus.OK).body(postagemService.descurtir(id));
+	}
+	
+	// Métodos Delete
 	
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable long id) {

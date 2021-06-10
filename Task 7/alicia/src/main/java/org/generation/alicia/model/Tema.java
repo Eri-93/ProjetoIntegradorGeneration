@@ -18,21 +18,25 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Table(name = "tb_tema")
 public class Tema {
 
+	// Atributos
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	
+
 	@NotNull
 	private String descricao;
-	
+
 	private long qtdPostagem;
-	
+
 	private boolean tendeciaSemana;
-	
+
 	@OneToMany(mappedBy = "tema", cascade = CascadeType.ALL)
 	@JsonIgnoreProperties("tema")
 	private List<Postagem> postagem;
 
+	// Getters and Setters
+	
 	public long getId() {
 		return id;
 	}
@@ -72,5 +76,5 @@ public class Tema {
 	public void setPostagem(List<Postagem> postagem) {
 		this.postagem = postagem;
 	}
-	
+
 }

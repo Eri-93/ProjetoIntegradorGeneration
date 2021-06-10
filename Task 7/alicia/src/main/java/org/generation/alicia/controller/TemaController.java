@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.generation.alicia.model.Tema;
 import org.generation.alicia.repository.TemaRepository;
+import org.generation.alicia.service.TemaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,33 +20,57 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping ("/tema")
-@CrossOrigin("*")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class TemaController {
+	
+	//Injeção de dependências
+	
+	@Autowired
+	private TemaService temaService;
 	
 	@Autowired
 	private TemaRepository repository;
+	
+	// Métodos Get
 	
 	@GetMapping
 	public ResponseEntity<List<Tema>> GetAll() {
 		return ResponseEntity.ok(repository.findAll());
 	}
+	
 	@GetMapping("/{id}")
 	public ResponseEntity<Tema> GetById(@PathVariable long id){
 		return repository.findById(id).map(resp -> ResponseEntity.ok(resp))
 				.orElse(ResponseEntity.notFound().build());
 	}
+	
 	@GetMapping("/descricao/{descricao}")
 	public ResponseEntity<List<Tema>> GetByDescricao (@PathVariable String descricao){
 		return ResponseEntity.ok(repository.findAllByDescricaoContainingIgnoreCase (descricao));
 	}
-	@PostMapping
+	
+	@GetMapping("/trendingtopics")
+	public ResponseEntity<List<Tema>> getTrendingTopics() {
+		
+		return ResponseEntity.ok(temaService.trendingTopics());
+	}
+	
+	// Métodos Post
+	
+	@PostMapping("/criar")
 	public ResponseEntity<Tema> post (@RequestBody Tema tema){
 		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(tema));
 	}
-	@PutMapping
+	
+	// Métodos Put
+	
+	@PutMapping("/alterar")
 	public ResponseEntity<Tema> put (@RequestBody Tema tema){
 		return ResponseEntity.status(HttpStatus.OK).body(repository.save(tema));
 	}
+	
+	//Métodos Delete
+	
 	@DeleteMapping ("/{id}")
 	public void delete (@PathVariable long id) {
 		repository.deleteById(id);

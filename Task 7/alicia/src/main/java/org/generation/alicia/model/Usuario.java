@@ -1,6 +1,6 @@
 package org.generation.alicia.model;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -14,52 +14,56 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.hibernate.validator.constraints.UniqueElements;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 
 @Entity
 @Table(name = "tb_usuario")
 public class Usuario {
+
+	//Atributos
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	
+
 	@NotNull
 	private String nome;
-	
+
 	@NotNull
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
-	private Date data_nascimento;
-	
+	private LocalDate dataNascimento;
+
 	@NotNull
 	@Email
 	private String login;
-	
+
 	@NotNull
-	@Size(min=5)
+	@Size(min = 5)
 	private String senha;
-	
-	@Size(max=100)
+
+	@Size(max = 100)
 	private String nomeStartUp;
 
+	//Resumo pessoal
 	
-	@Size(min= 5, max=500)
+	@Size(min = 5, max = 500)
 	private String resumo;
+
+	// Links para outras redes sociais:
 	
 	private String linkLinkedin;
-	
+
 	private String linkInstagram;
-	
+
 	private String linkFacebook;
-	
+
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
 	@JsonIgnoreProperties("usuario")
 	private List<Postagem> postagem;
 
+	//Getters and Setters
+	
 	public long getId() {
 		return id;
 	}
@@ -76,12 +80,12 @@ public class Usuario {
 		this.nome = nome;
 	}
 
-	public Date getData_nascimento() {
-		return data_nascimento;
+	public LocalDate getDataNascimento() {
+		return dataNascimento;
 	}
 
-	public void setData_nascimento(Date data_nascimento) {
-		this.data_nascimento = data_nascimento;
+	public void setDataNascimento(LocalDate dataNascimento) {
+		this.dataNascimento = dataNascimento;
 	}
 
 	public String getLogin() {
@@ -106,6 +110,7 @@ public class Usuario {
 
 	public void setNomeStartUp(String nomeStartUp) {
 		this.nomeStartUp = nomeStartUp;
+	}
 
 	public String getResumo() {
 		return resumo;

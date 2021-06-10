@@ -18,12 +18,14 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Table(name = "tb_postagem")
 public class Postagem {
 
+	// Atributos
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date data_postagem = new java.sql.Date(System.currentTimeMillis());
+	private Date dataPostagem = new java.sql.Date(System.currentTimeMillis());
 
 	private String midia;
 
@@ -42,6 +44,8 @@ public class Postagem {
 	@JsonIgnoreProperties("postagem")
 	private Usuario usuario;
 
+	// Getters and Setters
+	
 	public long getId() {
 		return id;
 	}
@@ -50,12 +54,12 @@ public class Postagem {
 		this.id = id;
 	}
 
-	public Date getData_postagem() {
-		return data_postagem;
+	public Date getDataPostagem() {
+		return dataPostagem;
 	}
 
-	public void setData_postagem(Date data_postagem) {
-		this.data_postagem = data_postagem;
+	public void setDataPostagem(Date dataPostagem) {
+		this.dataPostagem = dataPostagem;
 	}
 
 	public String getMidia() {
